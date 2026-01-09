@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.LimelightAimDriveCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -105,6 +106,14 @@ public class RobotContainer {
                                                                                     // negative
                                                                                 // X (left)
           ));
+            xboxController.rightTrigger(0.5)
+        .whileTrue(new LimelightAimDriveCommand(
+            drivetrainSubsys,
+            -xboxController.getLeftY() * MaxSpeed * 0.3,  // Reduced speed while aiming
+            -xboxController.getLeftX() * MaxSpeed * 0.3,
+            -xboxController.getRightX() * MaxAngularRate * 0.3,
+            false
+        ));  
     }
   }
 
